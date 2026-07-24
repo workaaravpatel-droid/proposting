@@ -75,7 +75,7 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
   display:flex;align-items:center;justify-content:space-between;
   padding:18px 0;
 }
-.nav-inner img{height:41px;width:auto}
+.nav-inner img{height:52px;width:auto}
 .nav-links{display:flex;gap:34px;align-items:center;font-weight:500;font-size:15px}
 .nav-links a{position:relative;padding:4px 0}
 .nav-links a::after{
@@ -314,7 +314,28 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .wk .veil h3{font-size:21px;font-weight:600;transform:translateY(10px);transition:transform .5s var(--ease) .05s}
 .wk:hover .veil .tag,.wk:hover .veil h3{transform:translateY(0)}
 
-/* ---------- founder ---------- */
+/* ---------- milestone (founding story + portfolio strip) ---------- */
+.milestone{padding:20px 0 90px}
+.milestone .sec-head{max-width:74ch}
+.milestone .sec-head h2{max-width:20ch}
+.milestone-strip{
+  margin-top:44px;display:flex;gap:16px;overflow-x:auto;padding-bottom:10px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+}
+.milestone-strip::-webkit-scrollbar{height:6px}
+.milestone-strip::-webkit-scrollbar-thumb{background:var(--teal-14);border-radius:10px}
+.m-item{
+  position:relative;flex:0 0 auto;width:min(230px,60vw);aspect-ratio:1/1.08;
+  border-radius:16px;overflow:hidden;scroll-snap-align:start;
+}
+.m-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.m-item:hover img{transform:scale(1.06)}
+.m-item span{
+  position:absolute;left:10px;bottom:10px;z-index:1;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:rgba(12,70,82,.65);backdrop-filter:blur(6px);
+  padding:5px 10px;border-radius:999px;
+}
 .founder{padding:20px 0 110px}
 .founder-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,5vw,72px);align-items:center}
 .founder-visual{position:relative;perspective:900px}
@@ -541,6 +562,27 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
   </div>
 </section>
 
+<!-- MILESTONE -->
+<section class="milestone">
+  <div class="shell">
+    <div class="sec-head rv">
+      <div>
+        <h2>Two Years Helping Brands Stand Out</h2>
+      </div>
+      <p class="lede">ProPosting started two years ago with a clear mission: bring sharp, considered marketing to brands that deserve better than templates. 100+ campaigns and six service lines later, we're still obsessed with the details that make a brand impossible to ignore.</p>
+    </div>
+    <div class="milestone-strip rv" aria-hidden="true">
+      <div class="m-item"><img src="assets/mockup-02.jpg" alt="" loading="lazy"><span>Print Design</span></div>
+      <div class="m-item"><img src="assets/mockup-03.jpg" alt="" loading="lazy"><span>Packaging</span></div>
+      <div class="m-item"><img src="assets/mockup-05.jpg" alt="" loading="lazy"><span>Brand Identity</span></div>
+      <div class="m-item"><img src="assets/mockup-07.jpg" alt="" loading="lazy"><span>Packaging</span></div>
+      <div class="m-item"><img src="assets/mockup-09.jpg" alt="" loading="lazy"><span>Product Design</span></div>
+      <div class="m-item"><img src="assets/mockup-10.jpg" alt="" loading="lazy"><span>Brand Identity</span></div>
+      <div class="m-item"><img src="assets/mockup-11.jpg" alt="" loading="lazy"><span>Stationery</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- FOUNDER -->
 <section class="founder" id="founder">
   <div class="shell">
@@ -611,9 +653,9 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">Selected Work</div>
-        <h2>Two Years Helping Brands Stand Out</h2>
+        <h2>Proof, not promises</h2>
       </div>
-      <p class="lede">ProPosting started two years ago with a clear mission: bring sharp, considered marketing to brands that deserve better than templates. 100+ campaigns and six service lines later, we're still obsessed with the details that make a brand impossible to ignore.</p>
+      <p class="lede">A few of the identities, campaigns and launches we've shaped end-to-end.</p>
     </div>
     <div class="work-grid">
       <figure class="wk rv"><img src="assets/mockup-01.jpg" alt="VYBE beverage billboard campaign" loading="lazy"><figcaption class="veil"><span class="tag">Campaign · OOH</span><h3>VYBE — Bold by Nature launch</h3></figcaption></figure>

@@ -229,20 +229,36 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:54px;flex-wrap:wrap}
 .sec-head h2{font-size:clamp(34px,4.4vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.05;max-width:16ch}
 .sec-head .lede{max-width:38ch;font-size:17px;line-height:1.6;color:rgba(12,70,82,.75)}
+.svc-scroll{display:grid;grid-template-columns:.6fr 1.4fr;gap:clamp(30px,5vw,60px);align-items:start}
+.svc-visual-sticky{
+  position:sticky;top:18vh;height:44vh;
+  border-radius:22px;background:var(--teal);overflow:hidden;
+  display:grid;place-items:center;
+}
+.svc-visual-item{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  opacity:0;transform:scale(.92);transition:opacity .5s var(--ease),transform .5s var(--ease);
+  color:#fff;
+}
+.svc-visual-item.active{opacity:1;transform:scale(1)}
+.svc-visual-item .vn{font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;color:var(--acid);letter-spacing:.08em}
+.svc-visual-item svg{width:56px;height:56px}
+.svc-visual-item .vt{font-family:'Bricolage Grotesque';font-size:20px;font-weight:700;max-width:16ch;text-align:center;padding:0 20px}
 .svc-list{border-top:1px solid var(--teal-14)}
 .svc-row{
-  display:grid;grid-template-columns:.9fr 1.7fr;gap:clamp(24px,4vw,64px);
-  padding:clamp(30px,4vw,46px) 4px;border-bottom:1px solid var(--teal-14);
-  transition:background .4s var(--ease);
+  display:block;padding:clamp(26px,3.6vw,40px) 4px;border-bottom:1px solid var(--teal-14);
+  transition:background .4s var(--ease),opacity .6s var(--ease),transform .6s var(--ease);
+  opacity:.4;transform:translateX(0);
 }
+.svc-row.active{opacity:1;background:#f6fafa}
 .svc-row:hover{background:#f6fafa}
 .svc-row .idx{
   font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(15px,1.4vw,17px);
   color:var(--aqua);letter-spacing:.02em;margin-bottom:10px;transition:color .4s var(--ease);
 }
-.svc-row:hover .idx{color:var(--acid)}
-.svc-row h3{font-size:clamp(24px,2.4vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.1}
-.svc-row .body{display:flex;flex-direction:column;justify-content:center}
+.svc-row:hover .idx,.svc-row.active .idx{color:var(--acid)}
+.svc-row h3{font-size:clamp(22px,2.2vw,30px);font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.svc-row .body{display:flex;flex-direction:column;justify-content:center;margin-top:12px}
 .svc-row p{font-size:16px;line-height:1.65;color:rgba(12,70,82,.75);max-width:52ch}
 .svc-row .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:9px}
 .svc-row .tags span{
@@ -257,7 +273,11 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 }
 .svc-row .go .arr{transition:transform .4s var(--ease)}
 .svc-row:hover .go .arr{transform:translateX(5px)}
-@media(max-width:820px){.svc-row{grid-template-columns:1fr;gap:14px}}
+@media(max-width:900px){
+  .svc-scroll{grid-template-columns:1fr}
+  .svc-visual-sticky{display:none}
+  .svc-row{opacity:1}
+}
 
 /* ---------- process ---------- */
 .process{padding:20px 0 100px}
@@ -599,30 +619,40 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
       </div>
       <p class="lede">Comprehensive digital marketing solutions tailored to your business needs — one team, six disciplines, zero handoffs.</p>
     </div>
-    <div class="svc-list">
-      <div class="svc-row rv">
-        <div><div class="idx">01</div><h3>Advertising &amp; Media</h3></div>
+    <div class="svc-scroll">
+      <div class="svc-visual-sticky" id="svcVisual">
+        <div class="svc-visual-item active" data-idx="1"><div class="vn">01</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg><div class="vt">Advertising &amp; Media</div></div>
+        <div class="svc-visual-item" data-idx="2"><div class="vn">02</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="vt">Brand Strategy</div></div>
+        <div class="svc-visual-item" data-idx="3"><div class="vn">03</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg><div class="vt">Marketing Consulting</div></div>
+        <div class="svc-visual-item" data-idx="4"><div class="vn">04</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16M4 10h16M4 15h10M4 20h7"/></svg><div class="vt">Content Solutions</div></div>
+        <div class="svc-visual-item" data-idx="5"><div class="vn">05</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div class="vt">Performance Marketing</div></div>
+        <div class="svc-visual-item" data-idx="6"><div class="vn">06</div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 12a4 4 0 108 0 4 4 0 00-8 0zM17 3l4 4-4 4M7 21l-4-4 4-4"/></svg><div class="vt">Social Media Marketing</div></div>
+      </div>
+      <div class="svc-list" id="svcList">
+      <div class="svc-row rv" data-idx="1">
+        <div class="idx">01</div><h3>Advertising &amp; Media</h3>
         <div class="body"><p>Strategic ad campaigns that capture attention and drive conversions across platforms.</p><div class="tags"><span>Paid search (PPC)</span><span>Social media ads</span><span>Display advertising</span><span>Video advertising</span><span>Retargeting campaigns</span></div><span class="go">Explore <span class="arr">→</span></span></div>
       </div>
-      <div class="svc-row rv">
-        <div><div class="idx">02</div><h3>Brand Strategy</h3></div>
+      <div class="svc-row rv" data-idx="2">
+        <div class="idx">02</div><h3>Brand Strategy</h3>
         <div class="body"><p>Develop a compelling brand identity that resonates with your target audience.</p><div class="tags"><span>Brand positioning</span><span>Identity development</span><span>Brand messaging</span><span>Competitive analysis</span><span>Brand guidelines</span></div><span class="go">Explore <span class="arr">→</span></span></div>
       </div>
-      <div class="svc-row rv">
-        <div><div class="idx">03</div><h3>Marketing Consulting</h3></div>
+      <div class="svc-row rv" data-idx="3">
+        <div class="idx">03</div><h3>Marketing Consulting</h3>
         <div class="body"><p>Expert guidance to optimize your marketing efforts and maximize ROI.</p><div class="tags"><span>Marketing audits</span><span>Strategy development</span><span>Campaign planning</span><span>MarTech consulting</span><span>Team training &amp; workshops</span></div><span class="go">Explore <span class="arr">→</span></span></div>
       </div>
-      <div class="svc-row rv">
-        <div><div class="idx">04</div><h3>Content Solutions</h3></div>
+      <div class="svc-row rv" data-idx="4">
+        <div class="idx">04</div><h3>Content Solutions</h3>
         <div class="body"><p>Engaging content that tells your story and connects with your audience.</p><div class="tags"><span>Content strategy</span><span>Blog &amp; article writing</span><span>Video production</span><span>Infographics &amp; visuals</span><span>Email marketing content</span></div><span class="go">Explore <span class="arr">→</span></span></div>
       </div>
-      <div class="svc-row rv">
-        <div><div class="idx">05</div><h3>Performance Marketing</h3></div>
+      <div class="svc-row rv" data-idx="5">
+        <div class="idx">05</div><h3>Performance Marketing</h3>
         <div class="body"><p>Data-driven campaigns focused on measurable results and continuous improvement.</p><div class="tags"><span>Conversion rate optimization</span><span>A/B testing</span><span>Analytics &amp; reporting</span><span>Marketing automation</span><span>Lead generation</span></div><span class="go">Explore <span class="arr">→</span></span></div>
       </div>
-      <div class="svc-row rv">
-        <div><div class="idx">06</div><h3>Social Media Marketing</h3></div>
+      <div class="svc-row rv" data-idx="6">
+        <div class="idx">06</div><h3>Social Media Marketing</h3>
         <div class="body"><p>Build community and engagement across social platforms to amplify your brand.</p><div class="tags"><span>Social strategy</span><span>Content creation &amp; curation</span><span>Community management</span><span>Influencer partnerships</span><span>Social listening &amp; analytics</span></div><span class="go">Explore <span class="arr">→</span></span></div>
+      </div>
       </div>
     </div>
   </div>
@@ -894,6 +924,21 @@ document.getElementById('tNext').onclick = () => showT(ti + 1);
 document.getElementById('tPrev').onclick = () => showT(ti - 1);
 let tAuto = setInterval(() => showT(ti + 1), 6500);
 document.querySelector('.testi-stage').addEventListener('pointerenter', () => clearInterval(tAuto));
+
+/* services: sync sticky visual to active row on scroll */
+const svcRows = [...document.querySelectorAll('.svc-row')];
+const svcVisualItems = [...document.querySelectorAll('.svc-visual-item')];
+if (svcRows.length && svcVisualItems.length) {
+  const svcObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = e.target.dataset.idx;
+      svcRows.forEach(r => r.classList.toggle('active', r.dataset.idx === idx));
+      svcVisualItems.forEach(v => v.classList.toggle('active', v.dataset.idx === idx));
+    });
+  }, {threshold: 0.5, rootMargin: '-15% 0px -35% 0px'});
+  svcRows.forEach(r => svcObserver.observe(r));
+}
 
 /* faq */
 document.querySelectorAll('.faq-item').forEach(item => {

@@ -396,41 +396,45 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .founder-stats span{font-size:13.5px;color:rgba(12,70,82,.65)}
 @media(max-width:900px){.founder-grid{grid-template-columns:1fr}.founder-visual{max-width:420px}.founder-stats{gap:28px}}
 
-/* ---------- testimonials ---------- */
+/* ---------- testimonials: scrolling columns ---------- */
 .testi{padding:20px 0 110px}
-.testi-stage{
-  position:relative;background:var(--teal);border-radius:28px;color:#fff;
-  padding:clamp(40px,6vw,76px);overflow:hidden;
+.testi-columns{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  height:560px;overflow:hidden;position:relative;border-radius:24px;
 }
-.testi-stage::before{
-  content:"“";position:absolute;top:-30px;left:34px;
-  font-family:'Bricolage Grotesque';font-size:220px;font-weight:700;color:rgba(160,211,213,.18);
-  line-height:1;pointer-events:none;
+.testi-columns::before,.testi-columns::after{
+  content:"";position:absolute;left:0;right:0;height:90px;z-index:2;pointer-events:none;
 }
-.t-slide{display:none;animation:tfade .6s var(--ease)}
-.t-slide.on{display:block}
-@keyframes tfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.t-slide blockquote{
-  font-family:'Bricolage Grotesque';font-weight:500;
-  font-size:clamp(21px,2.6vw,32px);line-height:1.35;letter-spacing:-.01em;
-  max-width:26ch;
+.testi-columns::before{top:0;background:linear-gradient(180deg,#fff,transparent)}
+.testi-columns::after{bottom:0;background:linear-gradient(0deg,#fff,transparent)}
+.testi-col{overflow:hidden;position:relative}
+.testi-track{display:flex;flex-direction:column;gap:20px;animation:testiScroll linear infinite}
+.testi-col[data-dir="up"] .testi-track{animation-name:testiScroll}
+.testi-col[data-dir="down"] .testi-track{animation-name:testiScrollRev}
+@keyframes testiScroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes testiScrollRev{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.testi-col:hover .testi-track{animation-play-state:paused}
+.t-card{
+  background:#f6fafa;border-radius:18px;padding:26px 24px;
+  border:1px solid var(--teal-14);
 }
-.t-slide blockquote mark{background:none;color:var(--acid)}
-.t-meta{margin-top:30px;display:flex;align-items:center;gap:14px}
-.t-meta .ava{
-  width:48px;height:48px;border-radius:50%;
-  display:grid;place-items:center;font-weight:700;font-size:16px;
-  background:var(--aqua);color:var(--teal);
+.t-card blockquote{font-size:15.5px;line-height:1.6;color:rgba(12,70,82,.85)}
+.t-card blockquote mark{background:none;color:var(--teal);font-weight:700}
+.t-card .t-meta{margin-top:16px;display:flex;align-items:center;gap:12px}
+.t-card .ava{
+  width:38px;height:38px;border-radius:50%;flex:none;
+  display:grid;place-items:center;font-weight:700;font-size:14px;
+  background:var(--teal);color:var(--acid);
 }
-.t-meta .who b{display:block;font-size:16px}
-.t-meta .who span{font-size:14px;color:rgba(255,255,255,.65)}
-.t-nav{position:absolute;right:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);display:flex;gap:10px}
-.t-nav button{
-  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
-  background:rgba(255,255,255,.1);color:#fff;
-  transition:background .35s,transform .35s var(--ease);
+.t-card .who b{display:block;font-size:14px;color:var(--teal)}
+@media(max-width:900px){
+  .testi-columns{grid-template-columns:repeat(2,1fr)}
+  .testi-col:nth-child(3){display:none}
 }
-.t-nav button:hover{background:var(--acid);color:var(--teal);transform:translateY(-2px)}
+@media(max-width:560px){
+  .testi-columns{grid-template-columns:1fr;height:480px}
+  .testi-col:nth-child(2),.testi-col:nth-child(3){display:none}
+}
 
 /* ---------- faq ---------- */
 .faq{padding:0 0 110px}
@@ -741,22 +745,36 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
         <h2>Word gets around</h2>
       </div>
     </div>
-    <div class="testi-stage rv">
-      <div class="t-slide on">
-        <blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote>
-        <div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div>
+    <div class="testi-columns rv">
+      <div class="testi-col" data-dir="up" style="--dur:26s">
+        <div class="testi-track" style="animation-duration:26s">
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+        </div>
       </div>
-      <div class="t-slide">
-        <blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote>
-        <div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div>
+      <div class="testi-col" data-dir="down">
+        <div class="testi-track" style="animation-duration:32s">
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+        </div>
       </div>
-      <div class="t-slide">
-        <blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote>
-        <div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div>
-      </div>
-      <div class="t-nav">
-        <button id="tPrev" aria-label="Previous testimonial">←</button>
-        <button id="tNext" aria-label="Next testimonial">→</button>
+      <div class="testi-col" data-dir="up">
+        <div class="testi-track" style="animation-duration:29s">
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+          <div class="t-card"><blockquote>Great eye to detailing with amazing approach to topics and products. Their <mark>Marketing kit is amazing</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Paaya</b></div></div></div>
+          <div class="t-card"><blockquote>Great creativity at content and graphics. Their organic campaigns have <mark>great results</mark>.</blockquote><div class="t-meta"><div class="ava">K</div><div class="who"><b>Kachighani</b></div></div></div>
+          <div class="t-card"><blockquote>Amazing newsletter marketing and <mark>quick responsive team</mark>.</blockquote><div class="t-meta"><div class="ava">P</div><div class="who"><b>Pashupati Earth Movers</b></div></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -964,18 +982,7 @@ if (fPhoto && window.gsap && !reduced) {
   zone.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
 }
 
-/* testimonials */
-const tSlides = [...document.querySelectorAll('.t-slide')];
-let ti = 0;
-function showT(n){
-  tSlides[ti].classList.remove('on');
-  ti = (n + tSlides.length) % tSlides.length;
-  tSlides[ti].classList.add('on');
-}
-document.getElementById('tNext').onclick = () => showT(ti + 1);
-document.getElementById('tPrev').onclick = () => showT(ti - 1);
-let tAuto = setInterval(() => showT(ti + 1), 6500);
-document.querySelector('.testi-stage').addEventListener('pointerenter', () => clearInterval(tAuto));
+/* testimonials: pure CSS scroll animation, no JS needed */
 
 /* services: sync sticky visual to active row on scroll */
 const svcRows = [...document.querySelectorAll('.svc-row')];

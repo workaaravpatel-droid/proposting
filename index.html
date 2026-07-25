@@ -299,25 +299,45 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 @media(max-width:980px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.proc-grid{grid-template-columns:1fr}}
 
-/* ---------- work ---------- */
+/* ---------- work: 3D carousel ---------- */
 .work{padding:20px 0 100px}
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.wk{
-  position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3.4;
-  cursor:pointer;
+.wk3d-wrap{
+  position:relative;height:420px;display:flex;align-items:center;justify-content:center;
+  perspective:1400px;
 }
-.wk img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.wk:hover img{transform:scale(1.05)}
-.wk .veil{
-  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:24px;color:#fff;
-  background:linear-gradient(180deg,transparent 45%,rgba(12,70,82,.86));
-  opacity:0;transition:opacity .5s var(--ease);
+.wk3d-track{
+  position:relative;height:100%;transform-style:preserve-3d;cursor:grab;
+  will-change:transform;
 }
-.wk:hover .veil{opacity:1}
-.wk .veil .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acid);margin-bottom:6px;transform:translateY(10px);transition:transform .5s var(--ease)}
-.wk .veil h3{font-size:21px;font-weight:600;transform:translateY(10px);transition:transform .5s var(--ease) .05s}
-.wk:hover .veil .tag,.wk:hover .veil h3{transform:translateY(0)}
+.wk3d-track.grabbing{cursor:grabbing}
+.wk3d-face{
+  position:absolute;top:50%;left:50%;width:230px;height:100%;max-height:320px;
+  margin-top:calc(320px / -2);margin-left:-115px;
+  border-radius:18px;overflow:hidden;backface-visibility:hidden;
+}
+.wk3d-face img{width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+.wk3d-face .cap{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+  background:linear-gradient(180deg,transparent 50%,rgba(12,70,82,.88));color:#fff;
+  opacity:0;transition:opacity .4s var(--ease);pointer-events:none;
+}
+.wk3d-face:hover .cap{opacity:1}
+.wk3d-face .cap .tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acid);margin-bottom:5px}
+.wk3d-face .cap h3{font-size:16px;font-weight:600}
+.wk3d-hint{text-align:center;margin-top:8px;font-size:13px;color:rgba(12,70,82,.5)}
+.wk3d-lightbox{
+  position:fixed;inset:0;z-index:200;background:rgba(12,70,82,.82);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:5vw;
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+}
+.wk3d-lightbox.open{opacity:1;pointer-events:auto}
+.wk3d-lightbox figure{max-width:560px;width:100%;background:#fff;border-radius:20px;overflow:hidden;transform:scale(.92);transition:transform .4s var(--ease)}
+.wk3d-lightbox.open figure{transform:scale(1)}
+.wk3d-lightbox img{width:100%;display:block;aspect-ratio:4/3.4;object-fit:cover}
+.wk3d-lightbox figcaption{padding:18px 22px 22px}
+.wk3d-lightbox .tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--aqua)}
+.wk3d-lightbox h3{font-size:19px;font-weight:700;margin-top:4px}
+@media(max-width:640px){.wk3d-wrap{height:320px}.wk3d-face{width:170px;max-height:230px;margin-top:calc(230px / -2);margin-left:-85px}}
 
 /* ---------- milestone (founding story + portfolio strip) ---------- */
 .milestone{padding:20px 0 90px}
@@ -490,7 +510,6 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
 
 /* ---------- responsive ---------- */
 @media(max-width:980px){
-  .work-grid{grid-template-columns:repeat(2,1fr)}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat{border-left:1px solid var(--teal-14)}
   .stat:nth-child(2n+1){border-left:none}
@@ -503,7 +522,7 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
   .hero-media{width:min(460px,86vw);height:24vh;right:6vw}
 }
 @media(max-width:640px){
-  .work-grid,.stats-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
   .stat{border-left:none!important;border-top:1px solid var(--teal-14)}
   .stat:first-child{border-top:none}
   .hero-media{width:88vw;height:22vh;bottom:3vh;right:6vw}
@@ -689,16 +708,29 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
       </div>
       <p class="lede">A few of the identities, campaigns and launches we've shaped end-to-end.</p>
     </div>
-    <div class="work-grid">
-      <figure class="wk rv"><img src="assets/mockup-01.jpg" alt="VYBE beverage billboard campaign" loading="lazy"><figcaption class="veil"><span class="tag">Campaign · OOH</span><h3>VYBE — Bold by Nature launch</h3></figcaption></figure>
-      <figure class="wk rv"><img src="assets/mockup-13.jpg" alt="Lumen storefront identity" loading="lazy"><figcaption class="veil"><span class="tag">Brand Identity</span><h3>Lumen Home &amp; Living retail identity</h3></figcaption></figure>
-      <figure class="wk rv"><img src="assets/mockup-06.jpg" alt="Crunchy Culture packaging" loading="lazy"><figcaption class="veil"><span class="tag">Packaging</span><h3>Crunchy Culture snack range</h3></figcaption></figure>
-      <figure class="wk rv"><img src="assets/mockup-04.jpg" alt="Harlowe Consulting stationery" loading="lazy"><figcaption class="veil"><span class="tag">Corporate Identity</span><h3>Harlowe Consulting brand suite</h3></figcaption></figure>
-      <figure class="wk rv"><img src="assets/mockup-08.jpg" alt="Slow Roast coffee packaging" loading="lazy"><figcaption class="veil"><span class="tag">Packaging</span><h3>Slow Roast Coffee Co. rebrand</h3></figcaption></figure>
-      <figure class="wk rv"><img src="assets/mockup-12.jpg" alt="Altura brand guidelines" loading="lazy"><figcaption class="veil"><span class="tag">Brand Strategy</span><h3>Altura identity system &amp; guidelines</h3></figcaption></figure>
+    <div class="wk3d-wrap rv">
+      <div class="wk3d-track" id="wk3dTrack">
+        <div class="wk3d-face" data-tag="Campaign · OOH" data-title="VYBE — Bold by Nature launch"><img src="assets/mockup-01.jpg" alt="VYBE beverage billboard campaign" loading="lazy"><div class="cap"><span class="tag">Campaign · OOH</span><h3>VYBE — Bold by Nature launch</h3></div></div>
+        <div class="wk3d-face" data-tag="Brand Identity" data-title="Lumen Home &amp; Living retail identity"><img src="assets/mockup-13.jpg" alt="Lumen storefront identity" loading="lazy"><div class="cap"><span class="tag">Brand Identity</span><h3>Lumen Home &amp; Living retail identity</h3></div></div>
+        <div class="wk3d-face" data-tag="Packaging" data-title="Crunchy Culture snack range"><img src="assets/mockup-06.jpg" alt="Crunchy Culture packaging" loading="lazy"><div class="cap"><span class="tag">Packaging</span><h3>Crunchy Culture snack range</h3></div></div>
+        <div class="wk3d-face" data-tag="Corporate Identity" data-title="Harlowe Consulting brand suite"><img src="assets/mockup-04.jpg" alt="Harlowe Consulting stationery" loading="lazy"><div class="cap"><span class="tag">Corporate Identity</span><h3>Harlowe Consulting brand suite</h3></div></div>
+        <div class="wk3d-face" data-tag="Packaging" data-title="Slow Roast Coffee Co. rebrand"><img src="assets/mockup-08.jpg" alt="Slow Roast coffee packaging" loading="lazy"><div class="cap"><span class="tag">Packaging</span><h3>Slow Roast Coffee Co. rebrand</h3></div></div>
+        <div class="wk3d-face" data-tag="Brand Strategy" data-title="Altura identity system &amp; guidelines"><img src="assets/mockup-12.jpg" alt="Altura brand guidelines" loading="lazy"><div class="cap"><span class="tag">Brand Strategy</span><h3>Altura identity system &amp; guidelines</h3></div></div>
+        <div class="wk3d-face" data-tag="Print Design" data-title="Seasonal poster series"><img src="assets/mockup-02.jpg" alt="Print design mockup" loading="lazy"><div class="cap"><span class="tag">Print Design</span><h3>Seasonal poster series</h3></div></div>
+        <div class="wk3d-face" data-tag="Packaging" data-title="Skincare packaging system"><img src="assets/mockup-03.jpg" alt="Packaging mockup" loading="lazy"><div class="cap"><span class="tag">Packaging</span><h3>Skincare packaging system</h3></div></div>
+        <div class="wk3d-face" data-tag="Product Design" data-title="Product line refresh"><img src="assets/mockup-07.jpg" alt="Product design mockup" loading="lazy"><div class="cap"><span class="tag">Product Design</span><h3>Product line refresh</h3></div></div>
+      </div>
     </div>
+    <p class="wk3d-hint">Drag to explore · click a piece to view it larger</p>
   </div>
 </section>
+
+<div class="wk3d-lightbox" id="wk3dLightbox">
+  <figure>
+    <img id="wk3dLightboxImg" src="" alt="">
+    <figcaption><span class="tag" id="wk3dLightboxTag"></span><h3 id="wk3dLightboxTitle"></h3></figcaption>
+  </figure>
+</div>
 
 <!-- TESTIMONIALS -->
 <section class="testi">
@@ -939,6 +971,82 @@ if (svcRows.length && svcVisualItems.length) {
   }, {threshold: 0.5, rootMargin: '-15% 0px -35% 0px'});
   svcRows.forEach(r => svcObserver.observe(r));
 }
+
+/* work: 3D drag carousel */
+(function(){
+  const track = document.getElementById('wk3dTrack');
+  if (!track) return;
+  const faces = [...track.querySelectorAll('.wk3d-face')];
+  const n = faces.length;
+  const isSm = window.innerWidth <= 640;
+  const radius = (isSm ? 170 : 230) * 1.35;
+  faces.forEach((f, i) => {
+    f.style.transform = `rotateY(${(360 / n) * i}deg) translateZ(${radius}px)`;
+  });
+
+  let rotY = 0, isDragging = false, startX = 0, startRot = 0, lastX = 0, vel = 0, lastT = 0;
+  let autoRotate = true;
+
+  function apply(){ track.style.transform = `translateZ(-${radius}px) rotateY(${rotY}deg)`; }
+  apply();
+
+  function onDown(x){
+    isDragging = true; autoRotate = false; startX = x; startRot = rotY; lastX = x; lastT = performance.now();
+    track.classList.add('grabbing');
+  }
+  function onMove(x){
+    if (!isDragging) return;
+    const dx = x - startX;
+    rotY = startRot + dx * 0.25;
+    const now = performance.now();
+    const dt = now - lastT || 16;
+    vel = ((x - lastX) * 0.25) / dt * 16;
+    lastX = x; lastT = now;
+    apply();
+  }
+  function onUp(){
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('grabbing');
+    let inertia = vel;
+    (function decay(){
+      if (Math.abs(inertia) < 0.01) { autoRotate = true; return; }
+      rotY += inertia; inertia *= 0.94; apply();
+      requestAnimationFrame(decay);
+    })();
+  }
+
+  track.addEventListener('mousedown', e => onDown(e.clientX));
+  window.addEventListener('mousemove', e => onMove(e.clientX));
+  window.addEventListener('mouseup', onUp);
+  track.addEventListener('touchstart', e => onDown(e.touches[0].clientX), {passive:true});
+  window.addEventListener('touchmove', e => onMove(e.touches[0].clientX), {passive:true});
+  window.addEventListener('touchend', onUp);
+
+  (function idle(){
+    if (autoRotate && !isDragging) { rotY += 0.05; apply(); }
+    requestAnimationFrame(idle);
+  })();
+
+  const lightbox = document.getElementById('wk3dLightbox');
+  const lbImg = document.getElementById('wk3dLightboxImg');
+  const lbTag = document.getElementById('wk3dLightboxTag');
+  const lbTitle = document.getElementById('wk3dLightboxTitle');
+  let dragDistance = 0;
+  track.addEventListener('mousedown', () => dragDistance = 0);
+  window.addEventListener('mousemove', e => { if (isDragging) dragDistance += Math.abs(e.movementX || 0); });
+
+  faces.forEach(f => {
+    f.addEventListener('click', () => {
+      if (dragDistance > 6) return;
+      lbImg.src = f.querySelector('img').src;
+      lbTag.textContent = f.dataset.tag;
+      lbTitle.textContent = f.dataset.title;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+})();
 
 /* faq */
 document.querySelectorAll('.faq-item').forEach(item => {

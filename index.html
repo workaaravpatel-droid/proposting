@@ -1050,10 +1050,18 @@ if (svcRows.length && svcVisualItems.length) {
   window.addEventListener('touchmove', e => onMove(e.touches[0].clientX), {passive:true});
   window.addEventListener('touchend', onUp);
 
-  (function idle(){
+  let inView = false, ticking = false;
+  function idle(){
+    if (!inView) { ticking = false; return; }
     if (autoRotate && !isDragging) { rotY += 0.05; apply(); }
     requestAnimationFrame(idle);
-  })();
+  }
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      inView = e.isIntersecting;
+      if (inView && !ticking) { ticking = true; requestAnimationFrame(idle); }
+    });
+  }, {threshold: 0.05}).observe(document.querySelector('.wk3d-wrap'));
 
   const lightbox = document.getElementById('wk3dLightbox');
   const lbImg = document.getElementById('wk3dLightboxImg');

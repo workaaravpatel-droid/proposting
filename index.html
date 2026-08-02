@@ -417,13 +417,13 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .founder-who b{font-family:'Bricolage Grotesque';font-size:18px;font-weight:700}
 .founder-who span{font-size:14px;color:rgba(12,70,82,.65)}
 .founder-bio{margin-top:18px;font-size:16px;line-height:1.7;color:rgba(12,70,82,.78);max-width:52ch}
-.founder-stats{margin-top:38px;display:flex;flex-wrap:wrap;padding-top:30px;border-top:1px solid var(--teal-14);position:relative;z-index:3}
-.founder-stats div{display:flex;flex-direction:column;gap:6px;padding:0 clamp(22px,3.4vw,42px);border-left:1px solid var(--teal-14)}
+.founder-stats{margin-top:38px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:30px;border-top:1px solid var(--teal-14);position:relative;z-index:3}
+.founder-stats div{display:flex;flex-direction:column;gap:6px;padding:0 clamp(14px,2vw,42px);border-left:1px solid var(--teal-14)}
 .founder-stats div:first-child{padding-left:0;border-left:none}
 .founder-stats b{font-family:'Bricolage Grotesque';font-size:clamp(30px,3.1vw,44px);font-weight:800;letter-spacing:-.02em;color:var(--teal)}
 .founder-stats b [data-count]{font-size:inherit;font-weight:inherit;text-transform:none;letter-spacing:inherit}
 .founder-stats > div > span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(12,70,82,.55)}
-@media(max-width:900px){.founder-grid{grid-template-columns:1fr}.founder-visual{max-width:340px;margin-left:0}.founder-photo{max-height:none}.founder-text{padding-top:28px}.founder-stats{gap:28px}}
+@media(max-width:900px){.founder-grid{grid-template-columns:1fr}.founder-visual{max-width:340px;margin-left:0}.founder-photo{max-height:none}.founder-text{padding-top:28px}.founder-stats{grid-template-columns:1fr;gap:20px}.founder-stats div{padding-left:0!important;border-left:none!important;padding-top:16px;border-top:1px solid var(--teal-14)}.founder-stats div:first-child{padding-top:0;border-top:none}}
 
 /* ---------- testimonials: scrolling columns ---------- */
 .testi{padding:20px 0 110px}

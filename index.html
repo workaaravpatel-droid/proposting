@@ -288,19 +288,20 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .process{padding:20px 0 100px}
 .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .proc{
-  position:relative;padding:30px 26px 28px;border-radius:20px;
-  border:1px solid var(--teal-14);background:#fff;
+  position:relative;padding:34px 26px 28px;border-radius:20px;
+  border:1px solid var(--teal-14);background:#fff;overflow:hidden;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s;
 }
 .proc:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 24px 44px -26px rgba(12,70,82,.35)}
 .proc .n{
-  font-family:'Bricolage Grotesque';font-weight:800;font-size:44px;line-height:1;
-  color:var(--aqua);margin-bottom:16px;
-  transition:color .4s var(--ease);
+  position:absolute;top:-6px;right:6px;
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:88px;line-height:1;
+  color:var(--aqua);opacity:.16;
+  transition:color .4s var(--ease),opacity .4s var(--ease);
 }
-.proc:hover .n{color:var(--acid)}
-.proc h3{font-size:19px;font-weight:600;margin-bottom:8px}
-.proc p{font-size:14.5px;line-height:1.6;color:rgba(12,70,82,.75)}
+.proc:hover .n{color:var(--acid);opacity:.4}
+.proc h3{position:relative;font-size:19px;font-weight:600;margin-bottom:8px}
+.proc p{position:relative;font-size:14.5px;line-height:1.6;color:rgba(12,70,82,.75)}
 @media(max-width:980px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.proc-grid{grid-template-columns:1fr}}
 
@@ -351,6 +352,8 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .milestone-strip{
   margin-top:44px;display:flex;gap:16px;overflow-x:auto;padding-bottom:10px;
   scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  padding-left:max(24px,calc((100vw - 1180px) / 2 + 24px));padding-right:24px;
 }
 .milestone-strip::-webkit-scrollbar{height:6px}
 .milestone-strip::-webkit-scrollbar-thumb{background:var(--teal-14);border-radius:10px}
@@ -367,8 +370,8 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
   padding:5px 10px;border-radius:999px;
 }
 .founder{padding:20px 0 110px}
-.founder-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,5vw,72px);align-items:center}
-.founder-visual{position:relative;perspective:900px}
+.founder-grid{display:grid;grid-template-columns:.62fr 1fr;gap:0 clamp(20px,3vw,40px);align-items:start}
+.founder-visual{position:relative;perspective:900px;margin-left:clamp(-40px,-6vw,-10px);z-index:2}
 .founder-visual::before{
   content:"";position:absolute;inset:8% -6% -6% 8%;z-index:0;border-radius:26px;
   background:radial-gradient(closest-side,rgba(225,227,29,.4),rgba(160,211,213,.25) 60%,transparent);
@@ -381,12 +384,14 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
   transform-style:preserve-3d;
   transition:box-shadow .4s var(--ease);
   will-change:transform,filter;
+  max-height:52vh;
 }
-.founder-photo img{width:100%;height:auto;display:block}
+.founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.founder-text{padding-top:8vh;position:relative;z-index:1}
 .founder-quote{
   font-family:'Bricolage Grotesque';font-weight:600;font-style:italic;
-  font-size:clamp(24px,2.7vw,36px);line-height:1.32;letter-spacing:-.01em;
-  color:var(--teal);max-width:24ch;
+  font-size:clamp(24px,2.9vw,40px);line-height:1.28;letter-spacing:-.01em;
+  color:var(--teal);max-width:22ch;
 }
 .founder-quote::before{content:"\201C";color:var(--acid);-webkit-text-stroke:1px var(--teal);margin-right:2px}
 .founder-quote::after{content:"\201D";color:var(--acid);-webkit-text-stroke:1px var(--teal);margin-left:2px}
@@ -395,11 +400,11 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 .founder-who b{font-family:'Bricolage Grotesque';font-size:18px;font-weight:700}
 .founder-who span{font-size:14px;color:rgba(12,70,82,.65)}
 .founder-bio{margin-top:18px;font-size:16px;line-height:1.7;color:rgba(12,70,82,.78);max-width:52ch}
-.founder-stats{margin-top:34px;display:flex;gap:clamp(24px,4vw,48px);flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--teal-14)}
+.founder-stats{margin-top:34px;display:flex;gap:clamp(24px,4vw,48px);flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--teal-14);position:relative;z-index:3}
 .founder-stats div{display:flex;flex-direction:column;gap:4px}
 .founder-stats b{font-family:'Bricolage Grotesque';font-size:clamp(24px,2.4vw,32px);font-weight:700;letter-spacing:-.01em}
 .founder-stats span{font-size:13.5px;color:rgba(12,70,82,.65)}
-@media(max-width:900px){.founder-grid{grid-template-columns:1fr}.founder-visual{max-width:420px}.founder-stats{gap:28px}}
+@media(max-width:900px){.founder-grid{grid-template-columns:1fr}.founder-visual{max-width:340px;margin-left:0}.founder-photo{max-height:none}.founder-text{padding-top:28px}.founder-stats{gap:28px}}
 
 /* ---------- testimonials: scrolling columns ---------- */
 .testi{padding:20px 0 110px}
@@ -492,7 +497,16 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(14px);box-sha
 #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
 #preloader img{height:44px;width:auto;animation:preloaderPulse 1.3s ease-in-out infinite}
 @keyframes preloaderPulse{0%,100%{opacity:.35;transform:scale(.94)}50%{opacity:1;transform:scale(1)}}
-footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
+footer{padding:0 0 34px;border-top:1px solid var(--teal-08)}
+.foot-cta{
+  padding:90px 0 70px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;
+  border-bottom:1px solid var(--teal-08);margin-bottom:56px;
+}
+.foot-cta h2{
+  font-family:'Bricolage Grotesque';font-weight:700;
+  font-size:clamp(34px,5.2vw,72px);line-height:1.02;letter-spacing:-.02em;color:var(--teal);
+}
+@media(max-width:640px){.foot-cta{padding:60px 0 46px}}
 .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:44px}
 .foot-brand img{height:36px;width:auto;margin-bottom:22px}
 .foot-social{display:flex;gap:12px}
@@ -632,7 +646,7 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
       <div class="founder-visual">
         <div class="founder-photo" id="founderPhoto"><img src="assets/founder.jpg" alt="Dhruvi Patel, Founder & CEO of ProPosting"></div>
       </div>
-      <div>
+      <div class="founder-text">
         <div class="eyebrow rv">The Founder</div>
         <p class="founder-quote rv">I studied marketing thousands of miles from home — and came back because I saw how much better it could be done here.</p>
         <div class="founder-who rv"><span class="rule"></span><div><b>Dhruvi Patel</b><br><span>Founder &amp; CEO</span></div></div>
@@ -847,6 +861,10 @@ footer{padding:70px 0 34px;border-top:1px solid var(--teal-08)}
 
 <footer>
   <div class="shell">
+    <div class="foot-cta">
+      <h2>Let's make your brand<br>impossible to ignore.</h2>
+      <a href="mailto:proposting.info@gmail.com" class="btn">Start a Project <span class="arr">→</span></a>
+    </div>
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="assets/logo.png" alt="ProPosting">
